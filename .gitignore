@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# Configuración local de NetBeans
+nbactions.xml
