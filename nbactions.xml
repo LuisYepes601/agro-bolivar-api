@@ -41,6 +41,7 @@
         <properties>
             <exec.args>-classpath %classpath com.nexus.demo.Agro-bolivarApplication</exec.args>
             <exec.executable>java</exec.executable>
+            sss
         </properties>
     </action>
 </actions>

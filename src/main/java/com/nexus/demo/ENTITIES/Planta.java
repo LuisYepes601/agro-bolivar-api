@@ -17,14 +17,13 @@ import jakarta.persistence.Table;
 @Table(name = "planta")
 @Entity()
 public class Planta {
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_familia_botanica")
     private FamiliaBotanica familiaBotanica;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_genero_planta")
     private GeneroPlanta generoPlanta;
-    
-    
+
 }
