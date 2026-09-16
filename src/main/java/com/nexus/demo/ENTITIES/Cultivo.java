@@ -27,11 +27,13 @@ public class Cultivo {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "id_usuario", nullable = false)
-    private Long idUsuario;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuariio")
+    private Usuario usuario;
 
-    @Column(name = "id_planta", nullable = false)
-    private Long idPlanta;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_planta")
+    private Planta planta;
 
     @Column(name = "fecha_inicio", nullable = false)
     private String fechaInicio;

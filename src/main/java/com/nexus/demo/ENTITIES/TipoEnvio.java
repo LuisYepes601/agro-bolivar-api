@@ -14,44 +14,41 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "unidad_peso")
-public class UnidadPeso {
+@Table(name = "tipo_envio",
+        indexes = {
+        
+            @Index(name = "idx_tipo_envio_nombre", columnList = "nombre")
+        })
+public class TipoEnvio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
-    @Column(name = "descripcion", nullable = true)
+    @Column(name = "descripcion", nullable = true, length = 200)
     private String descripcion;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadPeso")
-    private List<Cultivo> cultivos;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadPeso")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoEnvio")
     private List<DatosEnvio> datosEnvios;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadPeso")
-    private List<Producto> productos;
-
-    public UnidadPeso(Long id, String nombre, String descripcion, List<Cultivo> cultivos, List<DatosEnvio> datosEnvios, List<Producto> productos) {
+    public TipoEnvio(Long id, String nombre, String descripcion, List<DatosEnvio> datosEnvios) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.cultivos = cultivos;
         this.datosEnvios = datosEnvios;
-        this.productos = productos;
     }
 
-    public UnidadPeso() {
+    public TipoEnvio() {
     }
 
     public Long getId() {
@@ -78,14 +75,6 @@ public class UnidadPeso {
         this.descripcion = descripcion;
     }
 
-    public List<Cultivo> getCultivos() {
-        return cultivos;
-    }
-
-    public void setCultivos(List<Cultivo> cultivos) {
-        this.cultivos = cultivos;
-    }
-
     public List<DatosEnvio> getDatosEnvios() {
         return datosEnvios;
     }
@@ -94,11 +83,4 @@ public class UnidadPeso {
         this.datosEnvios = datosEnvios;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
 }

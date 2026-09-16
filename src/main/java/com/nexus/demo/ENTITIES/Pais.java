@@ -14,13 +14,18 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "unidad_peso")
-public class UnidadPeso {
+@Table(name = "pais",
+        indexes = {
+            @Index(name = "idx_pais_nombre", columnList = "nombre")
+
+        })
+public class Pais {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,25 +38,21 @@ public class UnidadPeso {
     @Column(name = "descripcion", nullable = true)
     private String descripcion;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadPeso")
-    private List<Cultivo> cultivos;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pais")
+    private List<Direccion> direcciones;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadPeso")
-    private List<DatosEnvio> datosEnvios;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pais")
+    private List<Departamento> departamentos;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadPeso")
-    private List<Producto> productos;
-
-    public UnidadPeso(Long id, String nombre, String descripcion, List<Cultivo> cultivos, List<DatosEnvio> datosEnvios, List<Producto> productos) {
+    public Pais(Long id, String nombre, String descripcion, List<Direccion> direcciones, List<Departamento> departamentos) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.cultivos = cultivos;
-        this.datosEnvios = datosEnvios;
-        this.productos = productos;
+        this.direcciones = direcciones;
+        this.departamentos = departamentos;
     }
 
-    public UnidadPeso() {
+    public Pais() {
     }
 
     public Long getId() {
@@ -78,27 +79,19 @@ public class UnidadPeso {
         this.descripcion = descripcion;
     }
 
-    public List<Cultivo> getCultivos() {
-        return cultivos;
+    public List<Direccion> getDirecciones() {
+        return direcciones;
     }
 
-    public void setCultivos(List<Cultivo> cultivos) {
-        this.cultivos = cultivos;
+    public void setDirecciones(List<Direccion> direcciones) {
+        this.direcciones = direcciones;
     }
 
-    public List<DatosEnvio> getDatosEnvios() {
-        return datosEnvios;
+    public List<Departamento> getDepartamentos() {
+        return departamentos;
     }
 
-    public void setDatosEnvios(List<DatosEnvio> datosEnvios) {
-        this.datosEnvios = datosEnvios;
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setDepartamentos(List<Departamento> departamentos) {
+        this.departamentos = departamentos;
     }
 }

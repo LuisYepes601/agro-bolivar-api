@@ -75,10 +75,13 @@ public class Usuario {
     @Column(name = "num_documento", nullable = false)
     private String numDocumento;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+    private List<Cultivo> cultivos;
+
     public Usuario() {
     }
 
-    public Usuario(Long id, String primerNombre, String segundoNombre, String email, String apellidoPaterno, String apellidoMaterno, Rol rol, TipoDocumento tipoDocumento, List<Pedido> pedidos, String contrasenia, Boolean estado, String imgUser, String publicIdImgUser, String numDocumento) {
+    public Usuario(Long id, String primerNombre, String segundoNombre, String email, String apellidoPaterno, String apellidoMaterno, Rol rol, TipoDocumento tipoDocumento, List<Pedido> pedidos, String contrasenia, Boolean estado, String imgUser, String publicIdImgUser, String numDocumento, List<Cultivo> cultivos) {
         this.id = id;
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
@@ -93,7 +96,10 @@ public class Usuario {
         this.imgUser = imgUser;
         this.publicIdImgUser = publicIdImgUser;
         this.numDocumento = numDocumento;
+        this.cultivos = cultivos;
     }
+
+  
 
     public Long getId() {
         return id;
@@ -161,6 +167,14 @@ public class Usuario {
 
     public List<Pedido> getPedidos() {
         return pedidos;
+    }
+
+    public List<Cultivo> getCultivos() {
+        return cultivos;
+    }
+
+    public void setCultivos(List<Cultivo> cultivos) {
+        this.cultivos = cultivos;
     }
 
     public void setPedidos(List<Pedido> pedidos) {

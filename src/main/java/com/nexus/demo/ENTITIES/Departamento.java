@@ -14,13 +14,15 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "unidad_peso")
-public class UnidadPeso {
+@Table(name = "departamento")
+public class Departamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,25 +35,22 @@ public class UnidadPeso {
     @Column(name = "descripcion", nullable = true)
     private String descripcion;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadPeso")
-    private List<Cultivo> cultivos;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pais")
+    private Pais pais;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadPeso")
-    private List<DatosEnvio> datosEnvios;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "departamento")
+    private List<Ciudad> ciudades;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unidadPeso")
-    private List<Producto> productos;
-
-    public UnidadPeso(Long id, String nombre, String descripcion, List<Cultivo> cultivos, List<DatosEnvio> datosEnvios, List<Producto> productos) {
+    public Departamento(Long id, String nombre, String descripcion, Pais pais, List<Ciudad> ciudades) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.cultivos = cultivos;
-        this.datosEnvios = datosEnvios;
-        this.productos = productos;
+        this.pais = pais;
+        this.ciudades = ciudades;
     }
 
-    public UnidadPeso() {
+    public Departamento() {
     }
 
     public Long getId() {
@@ -78,27 +77,19 @@ public class UnidadPeso {
         this.descripcion = descripcion;
     }
 
-    public List<Cultivo> getCultivos() {
-        return cultivos;
+    public Pais getPais() {
+        return pais;
     }
 
-    public void setCultivos(List<Cultivo> cultivos) {
-        this.cultivos = cultivos;
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
 
-    public List<DatosEnvio> getDatosEnvios() {
-        return datosEnvios;
+    public List<Ciudad> getCiudades() {
+        return ciudades;
     }
 
-    public void setDatosEnvios(List<DatosEnvio> datosEnvios) {
-        this.datosEnvios = datosEnvios;
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setCiudades(List<Ciudad> ciudades) {
+        this.ciudades = ciudades;
     }
 }

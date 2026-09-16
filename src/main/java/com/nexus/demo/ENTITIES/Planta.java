@@ -11,7 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 
 /**
  *
@@ -56,5 +58,8 @@ public class Planta {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_planta")
     private TipoPlanta tipoPlanta;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "planta")
+    private List<Cultivo> cultivos;
 
 }

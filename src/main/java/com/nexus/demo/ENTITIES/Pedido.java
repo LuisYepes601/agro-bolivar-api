@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.List;
 
@@ -38,12 +39,14 @@ public class Pedido {
     @Column(name = "total_items", nullable = false)
     private Integer totalItems;
 
-    @Column(name = "id_estado_pedido", nullable = false)
-    private Long idEstadoPedido;
-
-    @Column(name = "id_datos_envio", nullable = true)
-    private Long idDatosEnvio;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_estado_pedido")
+    private EstadoPedido estadoPedido;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_datos_envio")
+    private DatosEnvio datosEnvio;
+    
     @Column(name = "aplicableFree", nullable = false)
     private Boolean aplicableFree;
 
