@@ -14,14 +14,14 @@ import java.util.Map;
  */
 public class CloudinaryFileUtils {
 
-    public static Map<String, Object> ProfilePhtotoUser(String nameUser, String nameFile) {
+    public static Map<String, Object> FotoPlantaPrimary(String namePlanta, String nameFile) {
 
         Map<String, Object> utils = new HashMap<>();
 
-        utils.put("public_id", "biblionepo/usuarios/perfil_/"
+        utils.put("public_id", "agrobolivar/plantas/primaryl_/"
                 .concat(nameFile)
                 .concat("/")
-                .concat(nameUser));
+                .concat(namePlanta));
         utils.put("transformation", new Transformation<>()
                 .quality("auto")
                 .fetchFormat("auto")
