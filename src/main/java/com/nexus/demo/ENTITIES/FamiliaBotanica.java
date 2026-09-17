@@ -8,6 +8,7 @@ package com.nexus.demo.ENTITIES;
  *
  * @author luis
  */
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
         indexes = {
             @Index(name = "idx_familia_botanica_nombre", columnList = "nombre")
         })
-public class FamiliaBotanica {
+public class FamiliaBotanica extends Auditoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

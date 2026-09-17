@@ -2,58 +2,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.nexus.demo.ENTITIES;
+package com.nexus.demo.DTOS.RESPONSE.ESTACION_CULTIVO;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.LocalDate;
 
 /**
  *
  * @author luis
  */
-import com.nexus.demo.Auditoria;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.time.LocalDate;
-import java.util.List;
+public class EstacionCultivoAdminDtoResp {
 
-@Entity
-@Table(name = "estacion_cultivo")
-public class EstacionCultivo extends Auditoria{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @Column(name = "nombre", nullable = false)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private String nombre;
 
-    @Column(name = "descripcion", nullable = true, length = 300)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private String descripcion;
 
-    @Column(name = "fecha_inicio", nullable = true)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDate fechaInicio;
 
-    @Column(name = "fecha_fin", nullable = true)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDate fechaFin;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "estacionCultivo")
-    private List<Planta> plantas;
-
-    public EstacionCultivo() {
-    }
-
-    public EstacionCultivo(Long id, String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, List<Planta> plantas) {
+    public EstacionCultivoAdminDtoResp(Long id, String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.plantas = plantas;
+    }
+
+    public EstacionCultivoAdminDtoResp() {
     }
 
     public Long getId() {
@@ -94,14 +77,6 @@ public class EstacionCultivo extends Auditoria{
 
     public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
-    }
-
-    public List<Planta> getPlantas() {
-        return plantas;
-    }
-
-    public void setPlantas(List<Planta> plantas) {
-        this.plantas = plantas;
     }
 
 }

@@ -8,19 +8,24 @@ package com.nexus.demo.ENTITIES;
  *
  * @author luis
  */
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "tipo_planta")
-public class TipoPlanta {
+@Table(name = "tipo_planta",
+        indexes = {
+            @Index(name = "idx_tipo_planta_nombre", columnList = "nombre")
+        })
+public class TipoPlanta extends Auditoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +42,45 @@ public class TipoPlanta {
     private List<Planta> plantas;
 
     public TipoPlanta() {
+    }
+
+    public TipoPlanta(Long id, String nombre, String descripcion, List<Planta> plantas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.plantas = plantas;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public List<Planta> getPlantas() {
+        return plantas;
+    }
+
+    public void setPlantas(List<Planta> plantas) {
+        this.plantas = plantas;
     }
 
 }
