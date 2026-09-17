@@ -4,6 +4,7 @@
  */
 package com.nexus.demo.ENTITIES;
 
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,7 +25,7 @@ import java.util.List;
         indexes = {
             @Index(name = "idx_especie_nombre", columnList = "nombre")
         })
-public class Especie {
+public class Especie extends Auditoria{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

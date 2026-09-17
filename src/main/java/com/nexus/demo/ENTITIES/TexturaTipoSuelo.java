@@ -8,6 +8,7 @@ package com.nexus.demo.ENTITIES;
  *
  * @author luis
  */
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,7 +20,7 @@ import jakarta.persistence.*;
                     columnList = "id_tipo_suelo,id_textura_suelo")
 
         })
-public class TexturaTipoSuelo {
+public class TexturaTipoSuelo extends Auditoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
