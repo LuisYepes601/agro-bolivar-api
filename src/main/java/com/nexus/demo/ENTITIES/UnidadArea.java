@@ -8,6 +8,7 @@ package com.nexus.demo.ENTITIES;
  *
  * @author luis
  */
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,7 +26,7 @@ import java.util.List;
             @Index(name = "idx_unidad_area_nombre", columnList = "nombre")
 
         })
-public class UnidadArea {
+public class UnidadArea extends Auditoria{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

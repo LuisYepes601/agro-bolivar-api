@@ -8,6 +8,7 @@ package com.nexus.demo.ENTITIES;
  *
  * @author luis
  */
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "producto")
-public class Producto {
+public class Producto extends Auditoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +54,9 @@ public class Producto {
     @JoinColumn(name = "id_unidad_medida")
     private UnidadPeso unidadPeso;
 
+    @Column(name = "peso")
+    private Double peso;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_informacion_seguridad")
     private InformacionSeguridad informacionSeguridad;
@@ -64,26 +68,30 @@ public class Producto {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "producto")
     private List<DetallePedido> detallePedidos;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_inventario")
-    private InventarioProducto inventarioProducto;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "producto")
+    private List<InventarioProducto> inventarios;
 
     public Producto() {
     }
 
-    public Producto(Long id, String nombre, String descripcion, Double precioUnidad, CategoriaProducto categoriaProducto, String imgProdcuto, String publicIdImgProdcuto, UnidadPeso unidadPeso, InformacionSeguridad informacionSeguridad, MarcaProducto marcaProducto, List<DetallePedido> detallePedidos, InventarioProducto inventarioProducto) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precioUnidad = precioUnidad;
-        this.categoriaProducto = categoriaProducto;
-        this.imgProdcuto = imgProdcuto;
-        this.publicIdImgProdcuto = publicIdImgProdcuto;
-        this.unidadPeso = unidadPeso;
-        this.informacionSeguridad = informacionSeguridad;
-        this.marcaProducto = marcaProducto;
-        this.detallePedidos = detallePedidos;
-        this.inventarioProducto = inventarioProducto;
+    public Double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
+
+    public List<InventarioProducto> getInventarios() {
+        return inventarios;
+    }
+
+    public void setInventarios(List<InventarioProducto> inventarios) {
+        this.inventarios = inventarios;
     }
 
     public Long getId() {
@@ -174,12 +182,12 @@ public class Producto {
         this.detallePedidos = detallePedidos;
     }
 
-    public InventarioProducto getInventarioProducto() {
-        return inventarioProducto;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setInventarioProducto(InventarioProducto inventarioProducto) {
-        this.inventarioProducto = inventarioProducto;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

@@ -8,6 +8,7 @@ package com.nexus.demo.ENTITIES;
  *
  * @author luis
  */
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,7 +20,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "informacion_seguridad")
-public class InformacionSeguridad {
+public class InformacionSeguridad extends Auditoria{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

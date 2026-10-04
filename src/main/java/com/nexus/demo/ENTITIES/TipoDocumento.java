@@ -8,6 +8,7 @@ package com.nexus.demo.ENTITIES;
  *
  * @author luis
  */
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @Table(name = "tipo_documento")
 @Entity
-public class TipoDocumento {
+public class TipoDocumento extends Auditoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +35,48 @@ public class TipoDocumento {
     private String descripcion;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoDocumento")
-    private List<Usuario>usuarios;
-    
-    
+    private List<Usuario> usuarios;
+
+    public TipoDocumento(Long id, String nombre, String descripcion, List<Usuario> usuarios) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.usuarios = usuarios;
+    }
+
+    public TipoDocumento() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
 }

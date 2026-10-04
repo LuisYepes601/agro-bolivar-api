@@ -113,10 +113,6 @@ public class Planta extends Auditoria {
     private Especie especie;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_etapa")
-    private Etapa etapa;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ciclo_produccion")
     private CicloProduccion cicloProduccion;
 
@@ -135,8 +131,7 @@ public class Planta extends Auditoria {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "planta")
     private List<Cultivo> cultivos;
 
-    public Planta(Long id, String nombre, String nombreCientifico, String descripcion, Double temperaturaMinima, Double temperaturaMaxima, Double temperaturaIdeal, Double humedadMinima, Double humedadMaxima, Double humedadIdeal, Double horasSolaresMinimas, Double horasSolaresMaximas, Double horasSolaresIdeales, String imgPlanta, String publicIdImgPlanta, Double precipitacionMinima, Double precipitacionMaxima, Double precipitacionIdeal, Double altitudMinima, Double altitudMaxima, Double phSueloMinimo, Double phSueloMaximo, Double phSueloIdeal, String frecuenciaRiego, FamiliaBotanica familiaBotanica, GeneroPlanta generoPlanta, Especie especie, Etapa etapa, CicloProduccion cicloProduccion, CicloGerminacion cicloGerminacion, EstacionCultivo estacionCultivo, TipoPlanta tipoPlanta, List<Cultivo> cultivos, LocalDateTime createAt, LocalDateTime updateAt, LocalDateTime deleteAt, boolean isDelete, String createBy, String creatorName, String updateBy, String updateName, String deleteBy, String deleteName) {
-        super(createAt, updateAt, deleteAt, isDelete, createBy, creatorName, updateBy, updateName, deleteBy, deleteName);
+    public Planta(Long id, String nombre, String nombreCientifico, String descripcion, Double temperaturaMinima, Double temperaturaMaxima, Double temperaturaIdeal, Double humedadMinima, Double humedadMaxima, Double humedadIdeal, Double horasSolaresMinimas, Double horasSolaresMaximas, Double horasSolaresIdeales, String imgPlanta, String publicIdImgPlanta, Double precipitacionMinima, Double precipitacionMaxima, Double precipitacionIdeal, Double altitudMinima, Double altitudMaxima, Double phSueloMinimo, Double phSueloMaximo, Double phSueloIdeal, String frecuenciaRiego, FamiliaBotanica familiaBotanica, GeneroPlanta generoPlanta, Especie especie, CicloProduccion cicloProduccion, CicloGerminacion cicloGerminacion, EstacionCultivo estacionCultivo, TipoPlanta tipoPlanta, List<Cultivo> cultivos) {
         this.id = id;
         this.nombre = nombre;
         this.nombreCientifico = nombreCientifico;
@@ -164,7 +159,6 @@ public class Planta extends Auditoria {
         this.familiaBotanica = familiaBotanica;
         this.generoPlanta = generoPlanta;
         this.especie = especie;
-        this.etapa = etapa;
         this.cicloProduccion = cicloProduccion;
         this.cicloGerminacion = cicloGerminacion;
         this.estacionCultivo = estacionCultivo;
@@ -205,14 +199,6 @@ public class Planta extends Auditoria {
 
     public void setEspecie(Especie especie) {
         this.especie = especie;
-    }
-
-    public Etapa getEtapa() {
-        return etapa;
-    }
-
-    public void setEtapa(Etapa etapa) {
-        this.etapa = etapa;
     }
 
     public CicloProduccion getCicloProduccion() {

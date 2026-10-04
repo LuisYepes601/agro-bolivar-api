@@ -14,12 +14,17 @@ import org.springframework.web.multipart.MultipartFile;
 public interface ICloudinaryService {
 
     public CloudinaryUploadResponse uploadPrymaryFotoPlant(MultipartFile file, String namePlant, String namefile);
-    
+
     public void deleteFile(String public_id);
-    
+
     public CloudinaryUploadResponse uploadFotoPerfil(MultipartFile file, String nameUser, String nameFile);
-    
+
     public CloudinaryUploadResponse uploadPortadaLibro(MultipartFile portada, String nameFile);
-    
+
     public CloudinaryUploadResponse uploadLibro(MultipartFile libro, String nameFile);
+
+    public CloudinaryUploadResponse uploadFotoCultivo(MultipartFile file, String nameFile, String nameCultivo);
+
+    public CloudinaryUploadResponse uploadPrymaryFotoProduct(MultipartFile file, String nameProducto, String namefile);
+
 }

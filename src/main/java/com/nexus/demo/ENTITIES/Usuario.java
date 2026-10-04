@@ -8,6 +8,7 @@ package com.nexus.demo.ENTITIES;
  *
  * @author luis
  */
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,6 +19,7 @@ import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.List;
 
@@ -27,7 +29,7 @@ import java.util.List;
             @Index(name = "idx_usuario_primer_nombre", columnList = "primer_nombre"),
             @Index(name = "idx_usuario_email", columnList = "email")
         })
-public class Usuario {
+public class Usuario extends Auditoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,10 +80,16 @@ public class Usuario {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
     private List<Cultivo> cultivos;
 
-    public Usuario() {
-    }
+    @Column(name = "telefono")
+    private String telefono;
 
-    public Usuario(Long id, String primerNombre, String segundoNombre, String email, String apellidoPaterno, String apellidoMaterno, Rol rol, TipoDocumento tipoDocumento, List<Pedido> pedidos, String contrasenia, Boolean estado, String imgUser, String publicIdImgUser, String numDocumento, List<Cultivo> cultivos) {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+    private List<Producto> productos;
+    
+    @OneToOne(mappedBy = "usuario",fetch = FetchType.LAZY)
+    private Inventario inventarioProducto;
+
+    public Usuario(Long id, String primerNombre, String segundoNombre, String email, String apellidoPaterno, String apellidoMaterno, Rol rol, TipoDocumento tipoDocumento, List<Pedido> pedidos, String contrasenia, Boolean estado, String imgUser, String publicIdImgUser, String numDocumento, List<Cultivo> cultivos, String telefono, List<Producto> productos) {
         this.id = id;
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
@@ -97,9 +105,12 @@ public class Usuario {
         this.publicIdImgUser = publicIdImgUser;
         this.numDocumento = numDocumento;
         this.cultivos = cultivos;
+        this.telefono = telefono;
+        this.productos = productos;
     }
 
-  
+    public Usuario() {
+    }
 
     public Long getId() {
         return id;
@@ -219,6 +230,22 @@ public class Usuario {
 
     public void setNumDocumento(String numDocumento) {
         this.numDocumento = numDocumento;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 
 }

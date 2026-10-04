@@ -8,6 +8,7 @@ package com.nexus.demo.ENTITIES;
  *
  * @author luis
  */
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,11 +21,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "ciclo_produccion")
-public class CicloProduccion {
+public class CicloProduccion extends Auditoria{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre", length = 100)
+    private String nombre;
 
     @Column(nullable = true)
     private Integer diasMinimos;
@@ -38,14 +42,16 @@ public class CicloProduccion {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cicloProduccion")
     private List<Planta> plantas;
 
-    public CicloProduccion(Long id, Integer diasMinimos, Integer diasMaximos, String descripcion, List<Planta> plantas) {
+    public CicloProduccion(Long id, String nombre, Integer diasMinimos, Integer diasMaximos, String descripcion, List<Planta> plantas) {
         this.id = id;
+        this.nombre = nombre;
         this.diasMinimos = diasMinimos;
         this.diasMaximos = diasMaximos;
         this.descripcion = descripcion;
         this.plantas = plantas;
     }
 
+ 
     public CicloProduccion() {
     }
 
@@ -87,5 +93,13 @@ public class CicloProduccion {
 
     public void setPlantas(List<Planta> plantas) {
         this.plantas = plantas;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

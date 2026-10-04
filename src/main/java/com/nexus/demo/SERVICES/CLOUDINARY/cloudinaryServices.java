@@ -176,4 +176,55 @@ public class cloudinaryServices implements ICloudinaryService {
             );
         }
     }
+
+    @Override
+    public CloudinaryUploadResponse uploadFotoCultivo(MultipartFile file, String nameFile, String nameCultivo) {
+
+        try {
+
+            Map<String, Object> response = cloudinary
+                    .uploader()
+                    .upload(file, CloudinaryFileUtils.FotoCultivoPrimary(nameCultivo, nameFile));
+
+            CloudinaryUploadResponse cloudinaryUploadResponse = new CloudinaryUploadResponse();
+
+            Object secure_url = response.get("secure_url");
+            Object public_id = response.get("public_id");
+
+            cloudinaryUploadResponse.setSecureUrl(secure_url.toString());
+            cloudinaryUploadResponse.setPublicId(public_id.toString());
+
+            return cloudinaryUploadResponse;
+
+        } catch (IOException e) {
+
+            throw new RuntimeException(
+                    "Error al subir la foto del cultivo a Cloudinary",
+                    e
+            );
+        }
+
+    }
+
+    @Override
+    public CloudinaryUploadResponse uploadPrymaryFotoProduct(MultipartFile file, String namePlant, String namefile) {
+
+        try {
+            Map<String, String> repsonse = cloudinary.uploader()
+                    .upload(file.getBytes(), CloudinaryFileUtils.FotoProductoPrimary(namePlant, namefile));
+
+            CloudinaryUploadResponse cloudinaryUploadResponse = new CloudinaryUploadResponse();
+
+            cloudinaryUploadResponse.setSecureUrl(repsonse.get("secure_url").toString());
+            cloudinaryUploadResponse.setPublicId(repsonse.get("public_id").toString());
+
+            return cloudinaryUploadResponse;
+
+        } catch (IOException e) {
+
+            throw new RuntimeException(e.getMessage());
+        }
+
+    }
+
 }

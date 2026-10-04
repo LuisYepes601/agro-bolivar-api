@@ -8,6 +8,7 @@ package com.nexus.demo.ENTITIES;
  *
  * @author luis
  */
+import com.nexus.demo.Auditoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "estado_cultivo")
-public class EstadoCultivo {
+public class EstadoCultivo extends Auditoria{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,4 +39,45 @@ public class EstadoCultivo {
 
     public EstadoCultivo() {
     }
+
+    public EstadoCultivo(Long id, String nombre, String descripcion, List<Cultivo> cultivos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.cultivos = cultivos;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public List<Cultivo> getCultivos() {
+        return cultivos;
+    }
+
+    public void setCultivos(List<Cultivo> cultivos) {
+        this.cultivos = cultivos;
+    }
+    
+    
 }

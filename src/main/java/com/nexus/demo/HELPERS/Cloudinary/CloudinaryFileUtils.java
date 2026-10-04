@@ -32,6 +32,26 @@ public class CloudinaryFileUtils {
         return utils;
 
     }
+    
+      public static Map<String, Object> FotoCultivoPrimary(String namePlanta, String nameFile) {
+
+        Map<String, Object> utils = new HashMap<>();
+
+        utils.put("public_id", "agrobolivar/cultivos/primaryl_/"
+                .concat(nameFile)
+                .concat("/")
+                .concat(namePlanta));
+        utils.put("transformation", new Transformation<>()
+                .quality("auto")
+                .fetchFormat("auto")
+                .crop("limit")
+                .width(800)
+                .height(800));
+
+        return utils;
+
+    }
+
 
     public static Map<String, Object> prymaryFileBoock(String nameFile) {
 
@@ -105,5 +125,24 @@ public class CloudinaryFileUtils {
         utils.put("resource_type", "image");
 
         return utils;
+    }
+    
+     public static Map<String, Object> FotoProductoPrimary(String namePlanta, String nameFile) {
+
+        Map<String, Object> utils = new HashMap<>();
+
+        utils.put("public_id", "agrobolivar/cultivos/primaryl_/"
+                .concat(nameFile)
+                .concat("/")
+                .concat(namePlanta));
+        utils.put("transformation", new Transformation<>()
+                .quality("auto")
+                .fetchFormat("auto")
+                .crop("limit")
+                .width(800)
+                .height(800));
+
+        return utils;
+
     }
 }
