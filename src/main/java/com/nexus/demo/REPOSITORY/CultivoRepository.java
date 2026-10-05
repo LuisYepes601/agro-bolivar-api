@@ -40,6 +40,7 @@ public interface CultivoRepository extends JpaRepository<Cultivo, Long> {
            WHERE (:nombre_cultivo IS NULL OR LOWER(p.nombre) LIKE CONCAT(LOWER(CAST(:nombre_cultivo AS string)),'%'))
            AND(:id_estado IS NULL OR ec.id = :id_estado)
            AND(:is_delete IS NULL OR c.isDelete = :is_delete)
+           AND (:id_usuario IS NULL OR c.usuario.id = :id_usuario)
            
            
            """)
@@ -47,6 +48,7 @@ public interface CultivoRepository extends JpaRepository<Cultivo, Long> {
             @Param(value = "nombre_cultivo") String nombre_cultivo,
             @Param(value = "id_estado") Boolean id_estado,
             @Param(value = "is_delete") Boolean is_delete,
+            @Param(value = "id_usuario")Long id_usuario,
             Pageable pageable);
 
     @Query("""

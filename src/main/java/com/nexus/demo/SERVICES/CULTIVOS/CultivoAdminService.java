@@ -195,8 +195,9 @@ public class CultivoAdminService implements ICultivoAdminService {
     @Cacheable(value = "cultivos_admin")
     @Transactional(readOnly = true)
     @Override
-    public PageResponse<CultivoAdminDtoResp> getAll(String nombre, Boolean estado, Boolean active, Pageable pageable) {
-        Page<CultivoAdminDtoResp> page = cultivoRepository.getAllAdmin(nombre, estado, active, pageable);
+    public PageResponse<CultivoAdminDtoResp> getAll(
+            String nombre, Boolean estado, Boolean active, Long id_usuario, Pageable pageable) {
+        Page<CultivoAdminDtoResp> page = cultivoRepository.getAllAdmin(nombre, estado, active, id_usuario, pageable);
 
         if (page.isEmpty()) {
             throw new NoDatosQueMostrarExecption("No hay cultivos que mostar");

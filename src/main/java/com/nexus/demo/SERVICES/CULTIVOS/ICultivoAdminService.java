@@ -24,7 +24,8 @@ public interface ICultivoAdminService {
 
     public Cultivo editarFotoCultivo(Long id, MultipartFile foto);
 
-    public PageResponse<CultivoAdminDtoResp> getAll(String nombre, Boolean estado, Boolean active, Pageable pageable);
+    public PageResponse<CultivoAdminDtoResp> getAll(
+            String nombre, Boolean estado, Boolean active, Long id_usuario, Pageable pageable);
 
     public CultivoDtoResp getCultivoPorId(Long id);
 

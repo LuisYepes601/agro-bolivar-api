@@ -98,12 +98,13 @@ public class CultivoControllerAdminService {
             @RequestParam(name = "nombre", required = false) String nombre,
             @RequestParam(name = "estado", required = false) Boolean estado,
             @RequestParam(name = "active", required = false) Boolean active,
+            @RequestParam(name = "id_usuario", required = false)Long id_usuario,
             Pageable pageable
     ) {
 
         return ResponseEntity
                 .ok()
-                .body(cultivoAdminService.getAll(nombre, estado, active, pageable));
+                .body(cultivoAdminService.getAll(nombre, estado, active, id_usuario, pageable));
 
     }
 
