@@ -155,7 +155,7 @@ public class ProductoAdminService implements IProductoAdminService {
     @Override
     public PageResponse<ProductoDtoResp> getAllBasic(String nombre, Long id_cat, Long id_user, Long id_marca, Double precion_min, Double precio_max, Pageable pageable) {
 
-        Page<ProductoDtoResp> page = productoRepository.getAllBasic(nombre, id_marca, id_user, id_marca, precion_min, precio_max, pageable);
+        Page<ProductoDtoResp> page = productoRepository.getAllBasic(nombre, id_cat, id_user, id_marca, precion_min, precio_max, pageable);
 
         if (page.isEmpty()) {
             throw new NoDatosQueMostrarExecption("No hay productos que mostrar");

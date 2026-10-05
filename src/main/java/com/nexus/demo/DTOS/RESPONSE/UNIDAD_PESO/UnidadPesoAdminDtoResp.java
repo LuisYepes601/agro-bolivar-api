@@ -35,8 +35,9 @@ public class UnidadPesoAdminDtoResp {
         this.createAt = createAt;
         this.updateAt = updateAt;
     }
-    
-    
+
+    public UnidadPesoAdminDtoResp() {
+    }
 
     public Long getId() {
         return id;
