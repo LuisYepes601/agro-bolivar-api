@@ -45,7 +45,8 @@ public interface PlantaRepository extends JpaRepository<Planta, Long> {
           es.id,
           es.nombre,
           tp.id,
-          tp.nombre
+          tp.nombre,
+          p.imgPlanta
           
           
           ) 

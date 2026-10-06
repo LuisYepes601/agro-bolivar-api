@@ -44,7 +44,9 @@ public class PlantaDatosBasicAdminDtoResp {
     private Long idTipo;
     private String nombreTipo;
 
-    public PlantaDatosBasicAdminDtoResp(Long id, String nombre, String nombreCientifico, String descripcion, Long idFamilia, String nombreFamilia, Long idGenero, String nombreGenero, Long idEspecie, String nombreEspecie, Long idTipo, String nombreTipo) {
+    private String img;
+
+    public PlantaDatosBasicAdminDtoResp(Long id, String nombre, String nombreCientifico, String descripcion, Long idFamilia, String nombreFamilia, Long idGenero, String nombreGenero, Long idEspecie, String nombreEspecie, Long idTipo, String nombreTipo, String img) {
         this.id = id;
         this.nombre = nombre;
         this.nombreCientifico = nombreCientifico;
@@ -57,6 +59,7 @@ public class PlantaDatosBasicAdminDtoResp {
         this.nombreEspecie = nombreEspecie;
         this.idTipo = idTipo;
         this.nombreTipo = nombreTipo;
+        this.img = img;
     }
 
     public PlantaDatosBasicAdminDtoResp() {
@@ -156,6 +159,14 @@ public class PlantaDatosBasicAdminDtoResp {
 
     public void setNombreTipo(String nombreTipo) {
         this.nombreTipo = nombreTipo;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
 }
