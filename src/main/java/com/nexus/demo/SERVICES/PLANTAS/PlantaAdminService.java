@@ -16,6 +16,7 @@ import com.nexus.demo.DTOS.REQUEST.PLANTA.PlantaBasicDtoReq;
 import com.nexus.demo.DTOS.REQUEST.PLANTA.PlantaDtoReq;
 import com.nexus.demo.DTOS.REQUEST.PLANTA.RiegoPlantaDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaDatosBasicAdminDtoResp;
+import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaDtoRespMenu;
 import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaEditarAdminDtoResp;
 import com.nexus.demo.DatoNoExistenteEcxeption;
 import com.nexus.demo.DatoYaExistenteException;
@@ -82,7 +83,8 @@ public class PlantaAdminService implements IPlantaAdminService {
 
     @Caching(evict = {
         @CacheEvict(value = "plantas-admin", allEntries = true),
-        @CacheEvict(value = "plantas", allEntries = true)
+        @CacheEvict(value = "plantas", allEntries = true),
+        @CacheEvict(value = "plantas-menu", allEntries = true)
 
     })
     @Transactional(rollbackFor = Exception.class)
@@ -252,6 +254,7 @@ public class PlantaAdminService implements IPlantaAdminService {
     @Caching(evict = {
         @CacheEvict(value = "plantas-admin", allEntries = true),
         @CacheEvict(value = "plantas", allEntries = true),
+        @CacheEvict(value = "plantas-menu", allEntries = true),
         @CacheEvict(value = "planta_detail", allEntries = true)
 
     })
@@ -292,6 +295,7 @@ public class PlantaAdminService implements IPlantaAdminService {
     @Caching(evict = {
         @CacheEvict(value = "plantas-admin", allEntries = true),
         @CacheEvict(value = "plantas", allEntries = true),
+        @CacheEvict(value = "plantas-menu", allEntries = true),
         @CacheEvict(value = "planta_detail", allEntries = true)
 
     })
@@ -348,6 +352,7 @@ public class PlantaAdminService implements IPlantaAdminService {
     @Caching(evict = {
         @CacheEvict(value = "plantas-admin", allEntries = true),
         @CacheEvict(value = "plantas", allEntries = true),
+        @CacheEvict(value = "plantas-menu", allEntries = true),
         @CacheEvict(value = "planta_detail", allEntries = true)
 
     })
@@ -421,6 +426,7 @@ public class PlantaAdminService implements IPlantaAdminService {
     @Caching(evict = {
         @CacheEvict(value = "plantas-admin", allEntries = true),
         @CacheEvict(value = "plantas", allEntries = true),
+        @CacheEvict(value = "plantas-menu", allEntries = true),
         @CacheEvict(value = "planta_detail", allEntries = true)
 
     })
@@ -486,6 +492,7 @@ public class PlantaAdminService implements IPlantaAdminService {
 
     @Caching(evict = {
         @CacheEvict(value = "plantas-admin", allEntries = true),
+        @CacheEvict(value = "plantas-menu", allEntries = true),
         @CacheEvict(value = "plantas", allEntries = true),
         @CacheEvict(value = "planta_detail", allEntries = true)
 
@@ -557,6 +564,21 @@ public class PlantaAdminService implements IPlantaAdminService {
 
         return plantaRepo.getByID(id)
                 .orElseThrow(() -> new DatoNoExistenteEcxeption("La planta no existe en el sistema"));
+
+    }
+
+    @Cacheable(value = "plantas-menu")
+    @Transactional(readOnly = true)
+    @Override
+    public PageResponse<PlantaDtoRespMenu> getAllForMenuBar(Pageable pageable) {
+
+        Page<PlantaDtoRespMenu> page = plantaRepo.getAllMenuBar(pageable);
+
+        if (page.isEmpty()) {
+            throw new NoDatosQueMostrarExecption("No hay plantas que mostrar");
+        }
+
+        return PageResponseUtils.CreatePageReponse(page);
 
     }
 

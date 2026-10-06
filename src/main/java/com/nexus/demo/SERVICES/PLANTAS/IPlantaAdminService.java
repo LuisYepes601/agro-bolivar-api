@@ -13,6 +13,7 @@ import com.nexus.demo.DTOS.REQUEST.PLANTA.PlantaBasicDtoReq;
 import com.nexus.demo.DTOS.REQUEST.PLANTA.PlantaDtoReq;
 import com.nexus.demo.DTOS.REQUEST.PLANTA.RiegoPlantaDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaDatosBasicAdminDtoResp;
+import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaDtoRespMenu;
 import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaEditarAdminDtoResp;
 import com.nexus.demo.ENTITIES.GeneroPlanta;
 import com.nexus.demo.ENTITIES.Planta;
@@ -45,4 +46,6 @@ public interface IPlantaAdminService {
             Long id_tipo, Long id_familia, Long id_estacion_produccion, Pageable pageable);
     
     public PlantaEditarAdminDtoResp getPlantaByID(Long id);
+    
+    public PageResponse<PlantaDtoRespMenu>getAllForMenuBar(Pageable pageable);
 }

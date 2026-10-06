@@ -14,6 +14,7 @@ import com.nexus.demo.DTOS.REQUEST.PLANTA.PlantaBasicDtoReq;
 import com.nexus.demo.DTOS.REQUEST.PLANTA.PlantaDtoReq;
 import com.nexus.demo.DTOS.REQUEST.PLANTA.RiegoPlantaDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaDatosBasicAdminDtoResp;
+import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaDtoRespMenu;
 import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaEditarAdminDtoResp;
 import com.nexus.demo.SERVICES.PLANTAS.IPlantaAdminService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -212,4 +213,16 @@ public class PlantaAdminController {
                 .body(plantaAdminService.getPlantaByID(id));
 
     }
+
+    @Operation(description = "Operación encargada de de obtener datos basicos de las plantas del sistema",
+            method = "GET")
+    @GetMapping(value = "/basic")
+    public ResponseEntity<PageResponse<PlantaDtoRespMenu>>getDatosBasic(Pageable pageable){
+        
+        return ResponseEntity
+                .ok()
+                .body(plantaAdminService.getAllForMenuBar(pageable));
+        
+    }
+
 }

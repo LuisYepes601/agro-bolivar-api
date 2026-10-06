@@ -5,6 +5,7 @@
 package com.nexus.demo.REPOSITORY;
 
 import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaDatosBasicAdminDtoResp;
+import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaDtoRespMenu;
 import com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaEditarAdminDtoResp;
 import com.nexus.demo.ENTITIES.Especie;
 import com.nexus.demo.ENTITIES.Planta;
@@ -126,4 +127,18 @@ public interface PlantaRepository extends JpaRepository<Planta, Long> {
            
            """)
     public Optional<PlantaEditarAdminDtoResp> getByID(@Param(value = "id") Long id);
+
+    @Query("""
+           SELECT NEW com.nexus.demo.DTOS.RESPONSE.PLANTA.PlantaDtoRespMenu(
+           
+           p.id,
+           p.nombre
+           )
+           
+           FROM Planta p
+           
+           WHERE (p.isDelete = false)
+           
+           """)
+    public Page<PlantaDtoRespMenu> getAllMenuBar(Pageable pageable);
 }
