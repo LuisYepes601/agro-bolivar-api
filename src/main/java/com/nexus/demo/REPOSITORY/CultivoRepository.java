@@ -48,7 +48,7 @@ public interface CultivoRepository extends JpaRepository<Cultivo, Long> {
             @Param(value = "nombre_cultivo") String nombre_cultivo,
             @Param(value = "id_estado") Boolean id_estado,
             @Param(value = "is_delete") Boolean is_delete,
-            @Param(value = "id_usuario")Long id_usuario,
+            @Param(value = "id_usuario") Long id_usuario,
             Pageable pageable);
 
     @Query("""
@@ -83,6 +83,8 @@ public interface CultivoRepository extends JpaRepository<Cultivo, Long> {
            LEFT JOIN c.unidadPeso up
            LEFT JOIN c.unidadArea ua
            LEFT JOIN c.estadoCultivo ec
+           
+           WHERE c.id = :id
            
            """)
     public Optional<CultivoDtoResp> ObtenerById(
