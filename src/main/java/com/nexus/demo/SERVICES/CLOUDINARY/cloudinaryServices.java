@@ -184,7 +184,7 @@ public class cloudinaryServices implements ICloudinaryService {
 
             Map<String, Object> response = cloudinary
                     .uploader()
-                    .upload(file, CloudinaryFileUtils.FotoCultivoPrimary(nameCultivo, nameFile));
+                    .upload(file.getBytes(), CloudinaryFileUtils.FotoCultivoPrimary(nameCultivo, nameFile));
 
             CloudinaryUploadResponse cloudinaryUploadResponse = new CloudinaryUploadResponse();
 
