@@ -141,7 +141,8 @@ public class UsuarioService implements IUsuarioService {
     @Caching(
             evict = {
                 @CacheEvict(value = "usuarios_admin", allEntries = true),
-                @CacheEvict(value = "usuarios", allEntries = true)
+                @CacheEvict(value = "usuarios", allEntries = true),
+                @CacheEvict(value = "usuario", allEntries = true)
 
             }
     )
@@ -169,7 +170,8 @@ public class UsuarioService implements IUsuarioService {
     @Caching(
             evict = {
                 @CacheEvict(value = "usuarios_admin", allEntries = true),
-                @CacheEvict(value = "usuarios", allEntries = true)
+                @CacheEvict(value = "usuarios", allEntries = true),
+                @CacheEvict(value = "usuario", allEntries = true)
 
             }
     )
