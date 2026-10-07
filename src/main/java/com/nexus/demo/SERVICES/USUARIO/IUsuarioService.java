@@ -7,6 +7,7 @@ package com.nexus.demo.SERVICES.USUARIO;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReso;
 import com.nexus.demo.ENTITIES.Usuario;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -17,5 +18,7 @@ public interface IUsuarioService {
     public Usuario registrarce(UsuarioDtoReq usuarioDtoReq);
     
     public UsuarioDtoReso getUserById(Long id);
+    
+    public Usuario editarFotoPerfil(Long id, MultipartFile foto);
     
 }

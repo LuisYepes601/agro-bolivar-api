@@ -5,6 +5,7 @@
 package com.nexus.demo.SERVICES.USUARIO;
 
 import com.nexus.demo.AuditableUtils;
+import com.nexus.demo.DTOS.GLOBAL.CloudinaryUploadResponse;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReso;
 import com.nexus.demo.DatoNoExistenteEcxeption;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.nexus.demo.REPOSITORY.InventarioRepository;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -133,6 +135,34 @@ public class UsuarioService implements IUsuarioService {
         return usuarioRepository.getUsuarioById(id)
                 .orElseThrow(() -> new DatoNoExistenteEcxeption("El usuario no existe en el sistema"));
 
+    }
+
+    @Caching(
+            evict = {
+                @CacheEvict(value = "usuarios_admin", allEntries = true),
+                @CacheEvict(value = "usuarios", allEntries = true)
+
+            }
+    )
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Usuario editarFotoPerfil(Long id, MultipartFile foto) {
+
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new DatoNoExistenteEcxeption("El usuario no existe en el sistema."));
+
+        if (usuario.getPublicIdImgUser() != null) {
+
+            cloudinaryService.deleteFile(usuario.getPublicIdImgUser());
+
+        }
+
+        CloudinaryUploadResponse resp = cloudinaryService.uploadFotoPerfil(foto, usuario.getPrimerNombre(), foto.getOriginalFilename());
+
+        usuario.setImgUser(resp.getSecureUrl());
+        usuario.setPublicIdImgUser(resp.getPublicId());
+
+        return usuarioRepository.save(usuario);
     }
 
 }
