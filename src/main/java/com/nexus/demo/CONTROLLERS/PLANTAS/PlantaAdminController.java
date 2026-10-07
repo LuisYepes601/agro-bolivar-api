@@ -85,7 +85,7 @@ public class PlantaAdminController {
             method = "PUT")
     @PutMapping(value = "/{id}/clasificacion")
     public ResponseEntity<BasicResponseDto> editarDatosClasificacion(
-            @RequestPart(name = "id", required = true) Long id,
+            @RequestParam(name = "id", required = true) Long id,
             @Valid()
             @RequestBody(required = true) ClasificacionPlantaDtoReq clasificacionPlantaDtoReq
     ) {
