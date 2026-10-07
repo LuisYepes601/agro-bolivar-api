@@ -5,6 +5,7 @@
 package com.nexus.demo.REPOSITORY;
 
 import com.nexus.demo.DTOS.RESPONSE.DASHBOARD.DashBoardUserBasicDtoResp;
+import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReso;
 import com.nexus.demo.ENTITIES.Usuario;
 import io.lettuce.core.dynamic.annotation.Param;
 import java.util.Optional;
@@ -57,4 +58,31 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
            
            """)
     public Optional<DashBoardUserBasicDtoResp> getBasicDashboardHomeUser(@Param(value = "id") Long id);
+    
+    
+    @Query("""
+           SELECT NEW com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReso(
+           u.id,
+           u.primerNombre,
+           u.segundoNombre,
+           u.email,
+           u.apellidoPaterno,
+           u.apellidoMaterno,
+           r.nombre,
+           td.nombre,
+           u.estado,
+           u.imgUser,
+           u.numDocumento,
+           u.telefono
+           
+           )
+           
+           FROM Usuario u
+           LEFT JOIN u.rol r
+           LEFT JOIN u.tipoDocumento td
+           
+           WHERE u.id = :id
+           
+           """)
+    public Optional<UsuarioDtoReso>getUsuarioById(@Param(value = "id")Long id);
 }

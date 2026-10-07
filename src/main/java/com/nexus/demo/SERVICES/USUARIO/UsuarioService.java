@@ -6,6 +6,7 @@ package com.nexus.demo.SERVICES.USUARIO;
 
 import com.nexus.demo.AuditableUtils;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReq;
+import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReso;
 import com.nexus.demo.DatoNoExistenteEcxeption;
 import com.nexus.demo.DatoYaExistenteException;
 import com.nexus.demo.ENTITIES.Inventario;
@@ -22,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.nexus.demo.REPOSITORY.InventarioRepository;
+import org.springframework.cache.annotation.Cacheable;
 
 /**
  *
@@ -120,6 +122,16 @@ public class UsuarioService implements IUsuarioService {
             usuario.setSegundoNombre(usuarioDtoReq.getSegundoNombre().trim());
 
         }
+
+    }
+
+    @Cacheable(value = "usuario")
+    @Transactional(readOnly = true)
+    @Override
+    public UsuarioDtoReso getUserById(Long id) {
+
+        return usuarioRepository.getUsuarioById(id)
+                .orElseThrow(() -> new DatoNoExistenteEcxeption("El usuario no existe en el sistema"));
 
     }
 

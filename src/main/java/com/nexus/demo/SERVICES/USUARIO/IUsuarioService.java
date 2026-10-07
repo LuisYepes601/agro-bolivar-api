@@ -5,6 +5,7 @@
 package com.nexus.demo.SERVICES.USUARIO;
 
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReq;
+import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReso;
 import com.nexus.demo.ENTITIES.Usuario;
 
 /**
@@ -14,5 +15,7 @@ import com.nexus.demo.ENTITIES.Usuario;
 public interface IUsuarioService {
     
     public Usuario registrarce(UsuarioDtoReq usuarioDtoReq);
+    
+    public UsuarioDtoReso getUserById(Long id);
     
 }

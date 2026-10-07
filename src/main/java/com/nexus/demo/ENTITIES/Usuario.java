@@ -85,8 +85,8 @@ public class Usuario extends Auditoria {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
     private List<Producto> productos;
-    
-    @OneToOne(mappedBy = "usuario",fetch = FetchType.LAZY)
+
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Inventario inventarioProducto;
 
     public Usuario(Long id, String primerNombre, String segundoNombre, String email, String apellidoPaterno, String apellidoMaterno, Rol rol, TipoDocumento tipoDocumento, List<Pedido> pedidos, String contrasenia, Boolean estado, String imgUser, String publicIdImgUser, String numDocumento, List<Cultivo> cultivos, String telefono, List<Producto> productos) {
