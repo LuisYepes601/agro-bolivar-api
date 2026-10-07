@@ -5,6 +5,7 @@
 package com.nexus.demo.CONTROLLERS.USUARIO;
 
 import com.nexus.demo.DTOS.GLOBAL.BasicResponseDto;
+import com.nexus.demo.DTOS.RESPONSE.USUARIO.InformacionPersonalDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReso;
 import com.nexus.demo.SERVICES.USUARIO.IUsuarioService;
@@ -32,38 +33,38 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value = "/api/v1/usuarios")
 @RestController
 public class UsuarioController {
-    
+
     private IUsuarioService usuarioService;
-    
+
     @Autowired
     public UsuarioController(IUsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
-    
+
     @Operation(description = "Operación encragada de registrar un nuevo usuario al sistema",
             method = "POST")
     @PostMapping()
     public ResponseEntity<BasicResponseDto> registrarce(
             @Valid
             @RequestBody(required = true) UsuarioDtoReq usuarioDtoReq) {
-        
+
         usuarioService.registrarce(usuarioDtoReq);
-        
+
         return ResponseEntity
                 .ok()
                 .body(new BasicResponseDto("Te haz registrado con exito."));
     }
-    
+
     @Operation(description = "Operación encrgada de tarer los datos de un usuario",
             method = "GET")
     @GetMapping(value = "/{id}")
     public ResponseEntity<UsuarioDtoReso> getUsuarioById(@PathVariable(name = "id", required = true) Long id) {
-        
+
         return ResponseEntity
                 .ok()
                 .body(usuarioService.getUserById(id));
     }
-    
+
     @Operation(description = "Operación encraagda de editar foto del usuario",
             method = "PUT")
     @PutMapping(value = "/{id}/foto-perfil")
@@ -71,12 +72,27 @@ public class UsuarioController {
             @PathVariable(name = "id", required = true) Long id,
             @RequestPart(name = "foto", required = true) MultipartFile foto
     ) {
-        
+
         usuarioService.editarFotoPerfil(id, foto);
-        
+
         return ResponseEntity
                 .ok()
                 .body(new BasicResponseDto("Foto d eperfil actualizada con exito"));
     }
-    
+
+    @Operation(description = "Operación encargada de ediatr informacion personal del usuario",
+            method = "PUT")
+    @PutMapping(value = "/{id}/informacion-personal")
+    public ResponseEntity<BasicResponseDto> editarInformacionPersonal(
+            @PathVariable(name = "id", required = true) Long id,
+            @RequestBody(required = true) InformacionPersonalDtoReq informacionPersonalDtoReq
+    ) {
+        usuarioService.editarInformacionPersonal(id, informacionPersonalDtoReq);
+
+        return ResponseEntity
+                .ok()
+                .body(new BasicResponseDto("Se ha editado la información personal correctamente"));
+
+    }
+
 }

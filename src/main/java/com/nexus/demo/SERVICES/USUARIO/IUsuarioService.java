@@ -4,6 +4,7 @@
  */
 package com.nexus.demo.SERVICES.USUARIO;
 
+import com.nexus.demo.DTOS.RESPONSE.USUARIO.InformacionPersonalDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReso;
 import com.nexus.demo.ENTITIES.Usuario;
@@ -20,5 +21,7 @@ public interface IUsuarioService {
     public UsuarioDtoReso getUserById(Long id);
     
     public Usuario editarFotoPerfil(Long id, MultipartFile foto);
+    
+    public Usuario editarInformacionPersonal(Long id, InformacionPersonalDtoReq informacionPersonalDtoReq);
     
 }

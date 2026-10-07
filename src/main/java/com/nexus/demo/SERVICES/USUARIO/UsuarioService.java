@@ -6,6 +6,7 @@ package com.nexus.demo.SERVICES.USUARIO;
 
 import com.nexus.demo.AuditableUtils;
 import com.nexus.demo.DTOS.GLOBAL.CloudinaryUploadResponse;
+import com.nexus.demo.DTOS.RESPONSE.USUARIO.InformacionPersonalDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReq;
 import com.nexus.demo.DTOS.RESPONSE.USUARIO.UsuarioDtoReso;
 import com.nexus.demo.DatoNoExistenteEcxeption;
@@ -161,6 +162,43 @@ public class UsuarioService implements IUsuarioService {
 
         usuario.setImgUser(resp.getSecureUrl());
         usuario.setPublicIdImgUser(resp.getPublicId());
+
+        return usuarioRepository.save(usuario);
+    }
+
+    @Caching(
+            evict = {
+                @CacheEvict(value = "usuarios_admin", allEntries = true),
+                @CacheEvict(value = "usuarios", allEntries = true)
+
+            }
+    )
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Usuario editarInformacionPersonal(Long id, InformacionPersonalDtoReq informacionPersonalDtoReq) {
+
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new DatoNoExistenteEcxeption("El usuario no existe en el sistema."));
+
+        usuario.setTelefono(informacionPersonalDtoReq.getTelefono().trim());
+
+        usuario.setApellidoPaterno(informacionPersonalDtoReq.getApellidoPaterno().trim());
+        usuario.setApellidoMaterno(informacionPersonalDtoReq.getApellidoMaterno());
+
+        usuario.setTipoDocumento(tipoDocumentoRepository.findById(informacionPersonalDtoReq.getId_tipo_doc())
+                .orElseThrow(()
+                        -> new DatoNoExistenteEcxeption("El tipo de documento no existe en el sistema")));
+
+        usuario.setNumDocumento(informacionPersonalDtoReq.getNumDocumento().trim());
+
+        usuario.setEmail(informacionPersonalDtoReq.getEmail().trim());
+
+        usuario.setPrimerNombre(informacionPersonalDtoReq.getPrimerNombre().trim());
+
+        if (informacionPersonalDtoReq.getSegundoNombre() != null) {
+            usuario.setSegundoNombre(informacionPersonalDtoReq.getSegundoNombre().trim());
+
+        }
 
         return usuarioRepository.save(usuario);
     }
