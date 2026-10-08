@@ -24,7 +24,7 @@ public interface EstadoCultivoRepository extends JpaRepository<EstadoCultivo, Lo
            SELECT ec
            FROM EstadoCultivo ec
            
-           WHERE(LOWER(ec.nombre) = LOWER(nombre))
+           WHERE(LOWER(ec.nombre) = LOWER(:nombre))
            AND ec.isDelete = false
            """)
     public Optional<EstadoCultivo> existeAndEstaActivo(@Param(value = "nombre") String nombre);
