@@ -14,9 +14,20 @@ public class AuthDtoReq {
 
     private String password;
 
-    public AuthDtoReq(String username, String password) {
+    private String rol;
+
+    public AuthDtoReq(String username, String password, String rol) {
         this.username = username;
         this.password = password;
+        this.rol = rol;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public AuthDtoReq() {

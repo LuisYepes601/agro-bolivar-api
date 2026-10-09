@@ -50,6 +50,7 @@ public class AuthService implements IAuthService {
 
         authDtoResp.setId(usuario.getId());
         authDtoReq.setUsername(usuario.getEmail());
+        authDtoReq.getRol();
 
         return authDtoResp;
     }
